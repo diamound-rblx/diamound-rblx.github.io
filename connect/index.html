@@ -49,44 +49,36 @@ body {
 .content {
   flex: 1;
   padding: 25px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  text-align: center;
 }
 
-/* INPUT */
-input {
-  width: 100%;
-  padding: 12px;
-  border-radius: 12px;
-  border: none;
-  outline: none;
-  background: #f2f2f2;
-  font-size: 16px;
-  box-sizing: border-box;
+/* CODE */
+.code {
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+/* TIMER */
+.timer {
+  margin-top: 15px;
+  font-size: 14px;
+  color: gray;
 }
 
 /* BUTTON */
 .button {
   margin-top: 20px;
-  width: 100%;
   padding: 12px;
   border-radius: 12px;
   background: black;
   color: white;
-  text-align: center;
   cursor: pointer;
   transition: 0.2s;
 }
 
 .button:hover {
   transform: scale(1.05);
-}
-
-/* MESSAGE */
-#message {
-  margin-top: 15px;
-  font-size: 14px;
 }
 
 /* NAVBAR */
@@ -130,11 +122,12 @@ input {
 
   <div class="content">
 
-    <input type="text" id="codeInput" placeholder="Entrer le code">
+    <div>Ton code :</div>
+    <div class="code" id="code"></div>
 
-    <div class="button" onclick="verifyCode()">Valider</div>
+    <div class="timer" id="timer"></div>
 
-    <div id="message"></div>
+    <div class="button" onclick="generateCode()">Générer un nouveau code</div>
 
   </div>
 
@@ -149,25 +142,44 @@ input {
 </div>
 
 <script>
-function verifyCode() {
-  const code = document.getElementById("codeInput").value.trim();
-  const message = document.getElementById("message");
+let expiryTime;
 
-  if (code === "") {
-    message.innerText = "Entre un code.";
-    return;
-  }
+// Générer code
+function generateCode() {
+  const code = Math.random().toString(36).substring(2, 8).toUpperCase();
+  document.getElementById("code").innerText = code;
 
-  // Simulation (plus tard on reliera à Firebase)
-  if (code === "TEST123") {
-    message.innerText = "Code valide ✔";
-    message.style.color = "green";
-  } else {
-    message.innerText = "Code invalide ❌";
-    message.style.color = "red";
-  }
+  // 30 minutes = 30 * 60 * 1000 ms
+  expiryTime = Date.now() + 30 * 60 * 1000;
+
+  updateTimer();
 }
+
+// Timer
+function updateTimer() {
+  const timer = document.getElementById("timer");
+
+  const interval = setInterval(() => {
+    const now = Date.now();
+    const diff = expiryTime - now;
+
+    if (diff <= 0) {
+      clearInterval(interval);
+      timer.innerText = "Code expiré ❌";
+      return;
+    }
+
+    const minutes = Math.floor(diff / 60000);
+    const seconds = Math.floor((diff % 60000) / 1000);
+
+    timer.innerText = "Ce code expire dans " +
+      minutes + "m " + seconds + "s";
+  }, 1000);
+}
+
+// Générer un code au chargement
+generateCode();
 </script>
 
 </body>
-  </html>
+</html>
