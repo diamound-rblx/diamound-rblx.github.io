@@ -66,9 +66,9 @@ body {
   color: gray;
 }
 
-/* BUTTON */
+/* BUTTONS */
 .button {
-  margin-top: 20px;
+  margin-top: 15px;
   padding: 12px;
   border-radius: 12px;
   background: black;
@@ -79,6 +79,14 @@ body {
 
 .button:hover {
   transform: scale(1.05);
+}
+
+/* espace entre les boutons */
+.buttons-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 /* NAVBAR */
@@ -127,7 +135,14 @@ body {
 
     <div class="timer" id="timer"></div>
 
-    <div class="button" onclick="generateCode()">Générer un nouveau code</div>
+    <!-- BOUTONS -->
+    <div class="buttons-container">
+
+      <div class="button" onclick="copyCode()">Copier le code</div>
+
+      <div class="button" onclick="generateCode()">Générer un nouveau code</div>
+
+    </div>
 
   </div>
 
@@ -142,17 +157,25 @@ body {
 </div>
 
 <script>
+let currentCode = "";
 let expiryTime;
 
 // Générer code
 function generateCode() {
-  const code = Math.random().toString(36).substring(2, 8).toUpperCase();
-  document.getElementById("code").innerText = code;
+  currentCode = Math.random().toString(36).substring(2, 8).toUpperCase();
+  document.getElementById("code").innerText = currentCode;
 
-  // 30 minutes = 30 * 60 * 1000 ms
   expiryTime = Date.now() + 30 * 60 * 1000;
 
   updateTimer();
+}
+
+// Copier le code
+function copyCode() {
+  if (!currentCode) return;
+
+  navigator.clipboard.writeText(currentCode);
+  alert("Code copié !");
 }
 
 // Timer
@@ -177,7 +200,7 @@ function updateTimer() {
   }, 1000);
 }
 
-// Générer un code au chargement
+// Génère au chargement
 generateCode();
 </script>
 
