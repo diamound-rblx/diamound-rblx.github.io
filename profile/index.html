@@ -70,16 +70,27 @@ body {
 /* BOUTON */
 .button {
   margin-top: 20px;
-  padding: 10px;
+  padding: 12px;
   border-radius: 15px;
   background: black;
   color: white;
   cursor: pointer;
   transition: 0.2s;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .button:hover {
   transform: scale(1.05);
+}
+
+/* LOGO ROBLOX */
+.button img {
+  width: 20px;
+  height: 20px;
 }
 
 /* NAVBAR */
@@ -127,7 +138,11 @@ body {
 
     <div class="username">Non connecté</div>
 
-    <div class="button">Se connecter</div>
+    <!-- BOUTON CONNECT -->
+    <div class="button" onclick="window.location.href='/connect/'">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Roblox_Logo_White.svg">
+      Se connecter sur Diamound
+    </div>
 
   </div>
 
