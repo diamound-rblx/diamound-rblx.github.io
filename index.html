@@ -51,10 +51,10 @@ body {
 
 /* NAVBAR */
 .navbar-container {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-top: 15px;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .navbar {
@@ -68,7 +68,6 @@ body {
   box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
 }
 
-/* ICONES */
 .navbar img {
   width: 40px;
   height: 40px;
@@ -85,21 +84,19 @@ body {
 <body>
 
 <div class="card">
-
   <div class="header">Accueil</div>
   <div class="line"></div>
 
   <div class="content">
     Bienvenue sur Diamound 💎
   </div>
-
 </div>
 
 <div class="navbar-container">
   <div class="navbar">
-    <a href="index.html"><img src="assets/home.png"></a>
-    <a href="search.html"><img src="assets/search.png"></a>
-    <a href="profile.html"><img src="assets/profile.png"></a>
+    <a href="/"><img src="assets/home.png"></a>
+    <a href="/search"><img src="assets/search.png"></a>
+    <a href="/profile"><img src="assets/profile.png"></a>
   </div>
 </div>
 
