@@ -6,25 +6,32 @@
 <title>Diamound</title>
 
 <style>
-body {
+/* 🔥 BLOQUE LE SCROLL */
+html, body {
   margin: 0;
-  background: #1c1c1c; /* fond noir comme ton image */
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #1c1c1c;
   font-family: Arial, sans-serif;
-  height: 100vh;
+}
+
+/* CENTRAGE */
+body {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* CARTE PRINCIPALE (ARRONDIE) */
+/* CARTE */
 .app {
   width: 360px;
   height: 700px;
   background: white;
-  border-radius: 35px; /* 🔥 coins arrondis */
+  border-radius: 35px;
   display: flex;
   flex-direction: column;
-  overflow: hidden; /* empêche de casser les coins */
+  overflow: hidden;
 }
 
 /* HEADER */
@@ -42,21 +49,24 @@ body {
   margin: 10px auto;
 }
 
-/* CONTENU */
+/* CONTENU (prend tout l'espace disponible) */
 .content {
   flex: 1;
   padding: 20px;
 }
 
-/* BARRE DU BAS FIXE */
+/* NAVBAR BIEN SÉPARÉE */
 .navbar {
   height: 80px;
+  margin: 15px; /* 🔥 espace avec les bords */
+  border-radius: 25px; /* 🔥 coins arrondis */
   background: white;
+
   display: flex;
   justify-content: space-around;
   align-items: center;
 
-  border-top: 2px solid #ddd;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
 }
 
 /* ICONES */
@@ -85,7 +95,7 @@ body {
     Contenu ici
   </div>
 
-  <!-- BARRE DU BAS -->
+  <!-- BARRE EN BAS -->
   <div class="navbar">
     <img src="assets/home.png">
     <img src="assets/search.png">
