@@ -6,29 +6,25 @@
 <title>Diamound</title>
 
 <style>
-/* 🔥 BLOQUE LE SCROLL */
-html, body {
+body {
   margin: 0;
   padding: 0;
-  height: 100%;
-  overflow: hidden;
-  background: #1c1c1c;
+  background: #1c1c1c; /* fond noir */
   font-family: Arial, sans-serif;
-}
-
-/* CENTRAGE */
-body {
+  height: 100vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
 }
 
-/* CARTE */
-.app {
+/* CARTE BLANCHE */
+.card {
   width: 360px;
-  height: 700px;
+  height: 630px;
   background: white;
   border-radius: 35px;
+  margin-top: 20px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -49,24 +45,29 @@ body {
   margin: 10px auto;
 }
 
-/* CONTENU (prend tout l'espace disponible) */
+/* CONTENU */
 .content {
   flex: 1;
   padding: 20px;
 }
 
-/* NAVBAR BIEN SÉPARÉE */
-.navbar {
-  height: 80px;
-  margin: 15px; /* 🔥 espace avec les bords */
-  border-radius: 25px; /* 🔥 coins arrondis */
-  background: white;
+/* BARRE EN BAS (séparée) */
+.navbar-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
 
+.navbar {
+  width: 360px;
+  height: 70px;
+  background: white;
+  border-radius: 35px;
   display: flex;
   justify-content: space-around;
   align-items: center;
-
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
 }
 
 /* ICONES */
@@ -83,31 +84,30 @@ body {
 </style>
 
 </head>
-
 <body>
 
-<div class="app">
+  <!-- Carte blanche centrée -->
+  <div class="card">
+    <div class="header">Diamound</div>
+    <div class="line"></div>
 
-  <div class="header">Diamound</div>
-  <div class="line"></div>
-
-  <div class="content">
-    Contenu ici
+    <div class="content">
+      Contenu ici
+    </div>
   </div>
 
-  <!-- BARRE EN BAS -->
-  <div class="navbar">
-    <img src="assets/home.png">
-    <img src="assets/search.png">
-    <img src="assets/play.png" onclick="openGame()">
+  <!-- Barre en bas, séparée -->
+  <div class="navbar-container">
+    <div class="navbar">
+      <img src="assets/home.png" alt="Accueil">
+      <img src="assets/search.png" alt="Recherche">
+      <img src="assets/play.png" alt="Jouer" onclick="openGame()">
+    </div>
   </div>
-
-</div>
 
 <script>
 function openGame() {
   window.location.href = "roblox://placeId=TON_ID";
-
   setTimeout(() => {
     window.location.href = "https://www.roblox.com/games/TON_ID";
   }, 1500);
