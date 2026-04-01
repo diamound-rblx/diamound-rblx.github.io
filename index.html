@@ -3,31 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diamound</title>
+<title>Diamound - Accueil</title>
 
 <style>
 body {
   margin: 0;
-  padding: 0;
-  background: #1c1c1c; /* fond noir */
+  background: #1c1c1c;
   font-family: Arial, sans-serif;
   height: 100vh;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
-/* CARTE BLANCHE */
+/* CARTE */
 .card {
   width: 360px;
   height: 530px;
   background: white;
   border-radius: 35px;
-  margin-top: 20px;
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
 }
 
 /* HEADER */
@@ -45,13 +43,13 @@ body {
   margin: 10px auto;
 }
 
-/* CONTENU */
+/* CONTENT */
 .content {
   flex: 1;
   padding: 20px;
 }
 
-/* BARRE EN BAS (séparée) */
+/* NAVBAR */
 .navbar-container {
   width: 100%;
   display: flex;
@@ -86,33 +84,24 @@ body {
 </head>
 <body>
 
-  <!-- Carte blanche centrée -->
-  <div class="card">
-    <div class="header">Diamound</div>
-    <div class="line"></div>
+<div class="card">
 
-    <div class="content">
-      Contenu ici
-    </div>
+  <div class="header">Accueil</div>
+  <div class="line"></div>
+
+  <div class="content">
+    Bienvenue sur Diamound 💎
   </div>
 
-  <!-- Barre en bas, séparée -->
-  <div class="navbar-container">
-    <div class="navbar">
-      <img src="assets/home.png" alt="Accueil">
-      <img src="assets/search.png" alt="Recherche">
-      <img src="assets/play.png" alt="Jouer" onclick="openGame()">
-    </div>
-  </div>
+</div>
 
-<script>
-function openGame() {
-  window.location.href = "roblox://placeId=TON_ID";
-  setTimeout(() => {
-    window.location.href = "https://www.roblox.com/games/TON_ID";
-  }, 1500);
-}
-</script>
+<div class="navbar-container">
+  <div class="navbar">
+    <a href="index.html"><img src="assets/home.png"></a>
+    <a href="search.html"><img src="assets/search.png"></a>
+    <a href="profile.html"><img src="assets/profile.png"></a>
+  </div>
+</div>
 
 </body>
 </html>
