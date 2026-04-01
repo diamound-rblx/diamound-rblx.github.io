@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diamound - 404</title>
+
+<style>
+body {
+  margin: 0;
+  background: #1c1c1c;
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 20px;
+  overflow: hidden;
+}
+
+/* CARTE */
+.card {
+  width: 360px;
+  height: 530px;
+  background: white;
+  border-radius: 35px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+}
+
+/* HEADER */
+.header {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.line {
+  width: 80%;
+  height: 3px;
+  background: black;
+  margin: 10px auto;
+}
+
+/* CONTENT */
+.content {
+  flex: 1;
+  padding: 20px;
+}
+
+/* NAVBAR */
+.navbar-container {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.navbar {
+  width: 360px;
+  height: 70px;
+  background: white;
+  border-radius: 35px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+}
+
+.navbar img {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.navbar img:hover {
+  transform: scale(1.2);
+}
+</style>
+
+</head>
+<body>
+
+<div class="card">
+  <div class="header">404</div>
+  <div class="line"></div>
+
+  <div class="content">
+    Cette page est une erreur.
+  </div>
+</div>
+
+<div class="navbar-container">
+  <div class="navbar">
+    <a href="/"><img src="assets/home.png"></a>
+    <a href="/search/"><img src="assets/search.png"></a>
+    <a href="/profile/"><img src="assets/profile.png"></a>
+  </div>
+</div>
+
+</body>
+</html>
