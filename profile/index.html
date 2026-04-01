@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diamound - Profil</title>
+
+<style>
+body {
+  margin: 0;
+  background: #1c1c1c;
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 20px;
+  overflow: hidden;
+}
+
+/* CARTE */
+.card {
+  width: 360px;
+  height: 530px;
+  background: white;
+  border-radius: 35px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+}
+
+/* HEADER */
+.header {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.line {
+  width: 80%;
+  height: 3px;
+  background: black;
+  margin: 10px auto;
+}
+
+/* CONTENT */
+.content {
+  flex: 1;
+  padding: 20px;
+  text-align: center;
+}
+
+/* AVATAR */
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #ddd;
+  margin: 20px auto;
+}
+
+/* NOM */
+.username {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* BOUTON */
+.button {
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 15px;
+  background: black;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.button:hover {
+  transform: scale(1.05);
+}
+
+/* NAVBAR */
+.navbar-container {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.navbar {
+  width: 360px;
+  height: 70px;
+  background: white;
+  border-radius: 35px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+}
+
+.navbar img {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.navbar img:hover {
+  transform: scale(1.2);
+}
+</style>
+
+</head>
+<body>
+
+<div class="card">
+
+  <div class="header">Profil</div>
+  <div class="line"></div>
+
+  <div class="content">
+
+    <div class="avatar"></div>
+
+    <div class="username">Non connecté</div>
+
+    <div class="button">Se connecter</div>
+
+  </div>
+
+</div>
+
+<div class="navbar-container">
+  <div class="navbar">
+    <a href="/"><img src="/home.png"></a>
+    <a href="/search/"><img src="/search.png"></a>
+    <a href="/profile/"><img src="/profile.png"></a>
+  </div>
+</div>
+
+</body>
+</html>
