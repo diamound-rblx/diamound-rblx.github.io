@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diamound - Connexion</title>
+
+<style>
+body {
+  margin: 0;
+  background: #1c1c1c;
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 20px;
+  overflow: hidden;
+}
+
+/* CARTE */
+.card {
+  width: 360px;
+  height: 530px;
+  background: white;
+  border-radius: 35px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+}
+
+/* HEADER */
+.header {
+  text-align: center;
+  font-size: 26px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.line {
+  width: 80%;
+  height: 3px;
+  background: black;
+  margin: 10px auto;
+}
+
+/* CONTENT */
+.content {
+  flex: 1;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* INPUT */
+input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  background: #f2f2f2;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+/* BUTTON */
+.button {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  background: black;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.button:hover {
+  transform: scale(1.05);
+}
+
+/* MESSAGE */
+#message {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+/* NAVBAR */
+.navbar-container {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.navbar {
+  width: 360px;
+  height: 70px;
+  background: white;
+  border-radius: 35px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+}
+
+.navbar img {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.navbar img:hover {
+  transform: scale(1.2);
+}
+</style>
+
+</head>
+<body>
+
+<div class="card">
+
+  <div class="header">Connexion</div>
+  <div class="line"></div>
+
+  <div class="content">
+
+    <input type="text" id="codeInput" placeholder="Entrer le code">
+
+    <div class="button" onclick="verifyCode()">Valider</div>
+
+    <div id="message"></div>
+
+  </div>
+
+</div>
+
+<div class="navbar-container">
+  <div class="navbar">
+    <a href="/"><img src="/home.png"></a>
+    <a href="/search/"><img src="/search.png"></a>
+    <a href="/profile/"><img src="/profile.png"></a>
+  </div>
+</div>
+
+<script>
+function verifyCode() {
+  const code = document.getElementById("codeInput").value.trim();
+  const message = document.getElementById("message");
+
+  if (code === "") {
+    message.innerText = "Entre un code.";
+    return;
+  }
+
+  // Simulation (plus tard on reliera à Firebase)
+  if (code === "TEST123") {
+    message.innerText = "Code valide ✔";
+    message.style.color = "green";
+  } else {
+    message.innerText = "Code invalide ❌";
+    message.style.color = "red";
+  }
+}
+</script>
+
+</body>
+  </html>
