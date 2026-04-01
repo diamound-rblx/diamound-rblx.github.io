@@ -2,96 +2,108 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Diamound RBLX</title>
 
 <style>
-/* === RESET === */
-* {
+body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
-
-/* === BODY === */
-body {
-  font-family: "Segoe UI", Arial, sans-serif;
-  background: #0d0f16; /* fond sombre */
-  color: #fff;
-  text-align: center;
+  background: #1c1c1c;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100vh;
 }
 
-/* === CONTAINER PRINCIPAL === */
-.container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  gap: 20px;
+/* UI Phone Frame */
+.ui-frame {
+  width: 360px;
+  height: 720px;
+  background: white;
+  border-radius: 40px;
+  position: relative;
+  overflow: hidden;
 }
 
-/* === TITRE === */
-.title {
-  font-size: 4rem;
+/* HEADER */
+.header {
+  text-align: center;
+  font-size: 28px;
   font-weight: bold;
-  text-shadow: 0px 0px 10px #2e78d4;
+  padding-top: 20px;
 }
 
-/* === BOUTONS === */
-.button {
-  background: #2e78d4;
-  border: none;
-  padding: 15px 40px;
-  font-size: 1.5rem;
-  color: white;
-  border-radius: 12px;
+.header-line {
+  width: 80%;
+  height: 4px;
+  background: #000;
+  margin: 8px auto 12px auto;
+}
+
+/* CONTENT */
+.content {
+  padding: 0 20px;
+  font-size: 18px;
+  color: #000;
+}
+
+/* NAV BAR */
+.navbar {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  height: 70px;
+  background: white;
+  border-radius: 35px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+}
+
+.navbar img {
+  width: 40px;
+  height: 40px;
   cursor: pointer;
-  transition: 0.2s ease;
-  box-shadow: 0px 4px 8px rgba(0,0,0,0.4);
+  transition: 0.2s;
 }
 
-.button:hover {
-  transform: scale(1.1);
-  background: #1f5ea8;
-}
-
-/* === SECTIONS === */
-.section {
-  margin-top: 40px;
-  font-size: 1.2rem;
+.navbar img:hover {
+  transform: scale(1.2);
 }
 </style>
 
 </head>
 <body>
 
-<div class="container">
-  <div class="title">💎 Diamound RBLX</div>
+<div class="ui-frame">
 
-  <!-- Bouton jouer -->
-  <button class="button" onclick="openGame()">▶ Jouer</button>
+  <!-- HEADER -->
+  <div class="header">Accueil</div>
+  <div class="header-line"></div>
 
-  <!-- Infos / Sections -->
-  <div class="section">
-    <p>Bienvenue sur le site officiel de Diamound RBLX</p>
-    <p>Rejoins-nous et découvre l’aventure !</p>
+  <!-- CONTENT -->
+  <div class="content">Texte ici</div>
+
+  <!-- NAVIGATION -->
+  <div class="navbar">
+    <img src="https://raw.githubusercontent.com/diamound-rblx/diamound-rblx.github.io/main/home_icon.png" alt="Accueil">
+    <img src="https://raw.githubusercontent.com/diamound-rblx/diamound-rblx.github.io/main/search_icon.png" alt="Recherche">
+    <img src="https://raw.githubusercontent.com/diamound-rblx/diamound-rblx.github.io/main/play_icon.png" alt="Jouer" onclick="openGame()">
   </div>
+
 </div>
 
 <script>
 function openGame() {
-  const robloxLink = "roblox://placeId=TON_ID_ICI";
-  const webLink = "https://www.roblox.com/games/TON_ID_ICI";
-
-  // Essaye d'ouvrir Roblox
+  const robloxLink = "roblox://placeId=TON_ID";
+  const webLink = "https://www.roblox.com/games/TON_ID";
   window.location.href = robloxLink;
-
-  // Fallback après 1.5s vers la page web
-  setTimeout(() => {
-    window.location.href = webLink;
-  }, 1500);
+  setTimeout(() => { window.location.href = webLink; }, 1500);
 }
 </script>
 
