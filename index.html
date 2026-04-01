@@ -1,1 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diamound RBLX</title>
 
+<style>
+/* === RESET === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* === BODY === */
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #0d0f16; /* fond sombre */
+  color: #fff;
+  text-align: center;
+  height: 100vh;
+}
+
+/* === CONTAINER PRINCIPAL === */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  gap: 20px;
+}
+
+/* === TITRE === */
+.title {
+  font-size: 4rem;
+  font-weight: bold;
+  text-shadow: 0px 0px 10px #2e78d4;
+}
+
+/* === BOUTONS === */
+.button {
+  background: #2e78d4;
+  border: none;
+  padding: 15px 40px;
+  font-size: 1.5rem;
+  color: white;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.4);
+}
+
+.button:hover {
+  transform: scale(1.1);
+  background: #1f5ea8;
+}
+
+/* === SECTIONS === */
+.section {
+  margin-top: 40px;
+  font-size: 1.2rem;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+  <div class="title">💎 Diamound RBLX</div>
+
+  <!-- Bouton jouer -->
+  <button class="button" onclick="openGame()">▶ Jouer</button>
+
+  <!-- Infos / Sections -->
+  <div class="section">
+    <p>Bienvenue sur le site officiel de Diamound RBLX</p>
+    <p>Rejoins-nous et découvre l’aventure !</p>
+  </div>
+</div>
+
+<script>
+function openGame() {
+  const robloxLink = "roblox://placeId=TON_ID_ICI";
+  const webLink = "https://www.roblox.com/games/TON_ID_ICI";
+
+  // Essaye d'ouvrir Roblox
+  window.location.href = robloxLink;
+
+  // Fallback après 1.5s vers la page web
+  setTimeout(() => {
+    window.location.href = webLink;
+  }, 1500);
+}
+</script>
+
+</body>
+</html>
