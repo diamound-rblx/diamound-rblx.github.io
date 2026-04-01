@@ -3,21 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diamound RBLX</title>
+<title>Diamound</title>
 
 <style>
 body {
   margin: 0;
-  background: #1c1c1c;
+  background: #1c1c1c; /* fond noir comme ton image */
   font-family: Arial, sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* CONTENU GLOBAL */
+/* CARTE PRINCIPALE (ARRONDIE) */
 .app {
-  height: 100vh;
+  width: 360px;
+  height: 700px;
   background: white;
+  border-radius: 35px; /* 🔥 coins arrondis */
   display: flex;
   flex-direction: column;
+  overflow: hidden; /* empêche de casser les coins */
 }
 
 /* HEADER */
@@ -41,7 +48,7 @@ body {
   padding: 20px;
 }
 
-/* BARRE EN BAS FIXE */
+/* BARRE DU BAS FIXE */
 .navbar {
   height: 80px;
   background: white;
@@ -71,14 +78,14 @@ body {
 
 <div class="app">
 
-  <div class="header">Accueil</div>
+  <div class="header">Diamound</div>
   <div class="line"></div>
 
   <div class="content">
     Contenu ici
   </div>
 
-  <!-- BARRE EN BAS -->
+  <!-- BARRE DU BAS -->
   <div class="navbar">
     <img src="assets/home.png">
     <img src="assets/search.png">
@@ -89,13 +96,10 @@ body {
 
 <script>
 function openGame() {
-  const robloxLink = "roblox://placeId=TON_ID";
-  const webLink = "https://www.roblox.com/games/TON_ID";
-
-  window.location.href = robloxLink;
+  window.location.href = "roblox://placeId=TON_ID";
 
   setTimeout(() => {
-    window.location.href = webLink;
+    window.location.href = "https://www.roblox.com/games/TON_ID";
   }, 1500);
 }
 </script>
