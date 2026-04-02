@@ -9,16 +9,14 @@
 body {
   margin: 0;
   background: #1c1c1c;
-  font-family: Arial, sans-serif;
+  font-family: Arial;
   height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
   padding-top: 20px;
   overflow: hidden;
 }
 
-/* CARTE */
 .card {
   width: 360px;
   height: 530px;
@@ -26,14 +24,11 @@ body {
   border-radius: 35px;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+  text-align: center;
 }
 
-/* HEADER */
 .header {
-  text-align: center;
-  font-size: 26px;
+  font-size: 28px;
   font-weight: bold;
   margin-top: 20px;
 }
@@ -45,11 +40,8 @@ body {
   margin: 10px auto;
 }
 
-/* CONTENT */
 .content {
-  flex: 1;
-  padding: 25px;
-  text-align: center;
+  padding: 20px;
 }
 
 /* CODE */
@@ -67,8 +59,14 @@ body {
 }
 
 /* BUTTONS */
+.buttons {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .button {
-  margin-top: 15px;
   padding: 12px;
   border-radius: 12px;
   background: black;
@@ -81,14 +79,6 @@ body {
   transform: scale(1.05);
 }
 
-/* espace entre les boutons */
-.buttons-container {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
 /* NAVBAR */
 .navbar-container {
   position: fixed;
@@ -98,6 +88,7 @@ body {
 }
 
 .navbar {
+  position: relative;
   width: 360px;
   height: 70px;
   background: white;
@@ -105,22 +96,25 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+}
+
+.active-indicator {
+  position: absolute;
+  width: 55px;
+  height: 55px;
+  background: #4da6ff;
+  border-radius: 50%;
+  top: 7px;
+  transition: 0.35s;
 }
 
 .navbar img {
   width: 40px;
-  height: 40px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.navbar img:hover {
-  transform: scale(1.2);
 }
 </style>
 
 </head>
+
 <body>
 
 <div class="card">
@@ -135,13 +129,9 @@ body {
 
     <div class="timer" id="timer"></div>
 
-    <!-- BOUTONS -->
-    <div class="buttons-container">
-
+    <div class="buttons">
       <div class="button" onclick="copyCode()">Copier le code</div>
-
       <div class="button" onclick="generateCode()">Générer un nouveau code</div>
-
     </div>
 
   </div>
@@ -150,6 +140,8 @@ body {
 
 <div class="navbar-container">
   <div class="navbar">
+    <div class="active-indicator" id="indicator"></div>
+
     <a href="/"><img src="/home.png"></a>
     <a href="/search/"><img src="/search.png"></a>
     <a href="/profile/"><img src="/profile.png"></a>
@@ -157,51 +149,40 @@ body {
 </div>
 
 <script>
-let currentCode = "";
+let currentCode;
 let expiryTime;
 
-// Générer code
 function generateCode() {
-  currentCode = Math.random().toString(36).substring(2, 8).toUpperCase();
+  currentCode = Math.random().toString(36).substring(2,8).toUpperCase();
   document.getElementById("code").innerText = currentCode;
 
-  expiryTime = Date.now() + 30 * 60 * 1000;
-
-  updateTimer();
+  expiryTime = Date.now() + 30*60*1000;
 }
 
-// Copier le code
 function copyCode() {
-  if (!currentCode) return;
-
   navigator.clipboard.writeText(currentCode);
   alert("Code copié !");
 }
 
-// Timer
-function updateTimer() {
-  const timer = document.getElementById("timer");
+setInterval(() => {
+  const diff = expiryTime - Date.now();
+  if(diff <= 0){
+    document.getElementById("timer").innerText = "Code expiré ❌";
+    return;
+  }
 
-  const interval = setInterval(() => {
-    const now = Date.now();
-    const diff = expiryTime - now;
+  const m = Math.floor(diff/60000);
+  const s = Math.floor((diff%60000)/1000);
 
-    if (diff <= 0) {
-      clearInterval(interval);
-      timer.innerText = "Code expiré ❌";
-      return;
-    }
+  document.getElementById("timer").innerText =
+    `Ce code expire dans ${m}m ${s}s`;
 
-    const minutes = Math.floor(diff / 60000);
-    const seconds = Math.floor((diff % 60000) / 1000);
+},1000);
 
-    timer.innerText = "Ce code expire dans " +
-      minutes + "m " + seconds + "s";
-  }, 1000);
-}
-
-// Génère au chargement
 generateCode();
+
+/* NAVBAR */
+indicator.style.transform = "translateX(120px)";
 </script>
 
 </body>
