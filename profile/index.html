@@ -3,158 +3,60 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diamound - Profil</title>
+<title>Profil</title>
 
 <style>
-body {
-  margin: 0;
-  background: #1c1c1c;
-  font-family: Arial, sans-serif;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding-top: 20px;
-  overflow: hidden;
-}
+body { margin:0;background:#1c1c1c;font-family:Arial;height:100vh;display:flex;justify-content:center;padding-top:20px;overflow:hidden;}
+.card { width:360px;height:530px;background:white;border-radius:35px;text-align:center;}
+.header { font-size:28px;margin-top:20px;}
+.line { width:80%;height:3px;background:black;margin:10px auto;}
 
-/* CARTE */
-.card {
-  width: 360px;
-  height: 530px;
-  background: white;
-  border-radius: 35px;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
-}
-
-/* HEADER */
-.header {
-  text-align: center;
-  font-size: 28px;
-  font-weight: bold;
-  margin-top: 20px;
-}
-
-.line {
-  width: 80%;
-  height: 3px;
-  background: black;
-  margin: 10px auto;
-}
-
-/* CONTENT */
-.content {
-  flex: 1;
-  padding: 20px;
-  text-align: center;
-}
-
-/* AVATAR */
-.avatar {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: #ddd;
-  margin: 20px auto;
-}
-
-/* NOM */
-.username {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-/* BOUTON */
 .button {
-  margin-top: 20px;
-  padding: 12px;
-  border-radius: 15px;
-  background: black;
-  color: white;
-  cursor: pointer;
-  transition: 0.2s;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
-.button:hover {
-  transform: scale(1.05);
-}
-
-/* LOGO ROBLOX */
-.button img {
-  width: 20px;
-  height: 20px;
+  margin-top:20px;
+  padding:10px;
+  background:black;
+  color:white;
+  border-radius:15px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+  cursor:pointer;
 }
 
 /* NAVBAR */
-.navbar-container {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.navbar {
-  width: 360px;
-  height: 70px;
-  background: white;
-  border-radius: 35px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
-}
-
-.navbar img {
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.navbar img:hover {
-  transform: scale(1.2);
-}
+.navbar-container {position:fixed;bottom:20px;left:50%;transform:translateX(-50%);}
+.navbar {position:relative;width:360px;height:70px;background:white;border-radius:35px;display:flex;justify-content:space-around;align-items:center;}
+.active-indicator {position:absolute;width:55px;height:55px;background:#4da6ff;border-radius:50%;top:7px;transition:0.35s;}
+.navbar img {width:40px;}
 </style>
-
 </head>
+
 <body>
 
 <div class="card">
-
   <div class="header">Profil</div>
   <div class="line"></div>
 
-  <div class="content">
-
-    <div class="avatar"></div>
-
-    <div class="username">Non connecté</div>
-
-    <!-- BOUTON CONNECT -->
-    <div class="button" onclick="window.location.href='/connect/'">
-      <img src="/rblx-logo.png">
-      Se connecter sur Diamound
-    </div>
-
+  <div class="button" onclick="location.href='/connect/'">
+    <img src="/rblx-logo.png" style="width:20px">
+    Se connecter sur Diamound
   </div>
-
 </div>
 
 <div class="navbar-container">
   <div class="navbar">
+    <div class="active-indicator" id="indicator"></div>
+
     <a href="/"><img src="/home.png"></a>
     <a href="/search/"><img src="/search.png"></a>
     <a href="/profile/"><img src="/profile.png"></a>
   </div>
 </div>
+
+<script>
+indicator.style.transform = "translateX(240px)";
+</script>
 
 </body>
 </html>
