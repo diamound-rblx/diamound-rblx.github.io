@@ -1,36 +1,29 @@
-<DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diamound - Accueil</title>
+<title>Diamound</title>
 
 <style>
 body {
   margin: 0;
   background: #1c1c1c;
-  font-family: Arial, sans-serif;
+  font-family: Arial;
   height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
   padding-top: 20px;
   overflow: hidden;
 }
 
-/* CARTE */
 .card {
   width: 360px;
   height: 530px;
   background: white;
   border-radius: 35px;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
 }
 
-/* HEADER */
 .header {
   text-align: center;
   font-size: 28px;
@@ -45,12 +38,6 @@ body {
   margin: 10px auto;
 }
 
-/* CONTENT */
-.content {
-  flex: 1;
-  padding: 20px;
-}
-
 /* NAVBAR */
 .navbar-container {
   position: fixed;
@@ -60,6 +47,7 @@ body {
 }
 
 .navbar {
+  position: relative;
   width: 360px;
   height: 70px;
   background: white;
@@ -67,40 +55,58 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+}
+
+.active-indicator {
+  position: absolute;
+  width: 55px;
+  height: 55px;
+  background: #4da6ff;
+  border-radius: 50%;
+  top: 7px;
+  left: 0;
+  transition: 0.35s;
+}
+
+.navbar a {
+  position: relative;
+  z-index: 1;
 }
 
 .navbar img {
   width: 40px;
-  height: 40px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.navbar img:hover {
-  transform: scale(1.2);
 }
 </style>
-
 </head>
+
 <body>
 
 <div class="card">
   <div class="header">Accueil</div>
   <div class="line"></div>
-
-  <div class="content">
-    Bienvenue sur Diamound 💎
-  </div>
 </div>
 
 <div class="navbar-container">
   <div class="navbar">
-    <a href="/"><img src="/home.png"></a>
-    <a href="/search/"><img src="/search.png"></a>
-    <a href="/profile/"><img src="/profile.png"></a>
+    <div class="active-indicator" id="indicator"></div>
+
+    <a href="/" data-page="home"><img src="/home.png"></a>
+    <a href="/search/" data-page="search"><img src="/search.png"></a>
+    <a href="/profile/" data-page="profile"><img src="/profile.png"></a>
   </div>
 </div>
+
+<script>
+function getPage() {
+  const path = location.pathname;
+  if (path.startsWith("/search")) return 1;
+  if (path.startsWith("/profile")) return 2;
+  return 0;
+}
+
+document.getElementById("indicator").style.transform =
+  "translateX(" + (getPage() * 120) + "px)";
+</script>
 
 </body>
 </html>
