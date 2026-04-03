@@ -3,69 +3,40 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diamound - Recherche</title>
+<title>Recherche</title>
 
 <style>
 body {
   margin: 0;
   background: #1c1c1c;
   font-family: Arial, sans-serif;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding-top: 20px;
-  overflow: hidden;
 }
 
-.card {
+/* CONTENEUR */
+.container {
   width: 360px;
-  height: 530px;
+  margin: 20px auto;
   background: white;
   border-radius: 35px;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-.header {
-  text-align: center;
-  font-size: 28px;
-  font-weight: bold;
-  margin-top: 20px;
-}
-
-.line {
-  width: 80%;
-  height: 3px;
-  background: black;
-  margin: 10px auto;
-}
-
-.content {
-  flex: 1;
-  padding: 25px;
-}
-
+/* BARRE DE RECHERCHE */
 input {
   width: 100%;
-  padding: 12px 15px;
-  border-radius: 15px;
-  border: none;
-  background: #f2f2f2;
-}
-
-.result {
   padding: 12px;
-  margin-top: 10px;
-  background: #f5f5f5;
-  border-radius: 12px;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 14px;
 }
 
-.type {
+/* TITRES */
+.section-title {
   font-size: 12px;
   color: gray;
+  margin: 15px 0 5px 0;
 }
 
 /* NAVBAR */
@@ -77,7 +48,6 @@ input {
 }
 
 .navbar {
-  position: relative;
   width: 360px;
   height: 70px;
   background: white;
@@ -85,8 +55,17 @@ input {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  position: relative;
 }
 
+.navbar img {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+/* INDICATEUR */
 .nav-indicator {
   position: absolute;
   width: 55px;
@@ -95,36 +74,32 @@ input {
   border-radius: 50%;
   top: 7px;
   left: 0;
-  z-index: 0;
-  transition: transform 0.35s ease;
-}
-
-.navbar a { position:relative; z-index:1; }
-
-.navbar img {
-  width: 40px;
-  height: 40px;
+  z-index: 1;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 </style>
 
 </head>
 <body>
 
-<div class="card">
+<div class="container">
 
-  <div class="header">Recherche</div>
-  <div class="line"></div>
+  <input type="text" placeholder="Rechercher...">
 
-  <div class="content">
+  <!-- JOUEURS -->
+  <div class="section-title">Joueurs</div>
+  <p>PC_001</p>
+  <p>YouTube</p>
+  <p>MathisB11</p>
+  <p>BlocPlayStudios</p>
 
-    <input type="text" id="searchInput" placeholder="Rechercher...">
-
-    <div id="results" style="margin-top:20px;"></div>
-
-  </div>
+  <!-- MAPS -->
+  <div class="section-title">Maps</div>
+  <p>Spawn</p>
 
 </div>
 
+<!-- NAVBAR -->
 <div class="navbar-container">
   <div class="navbar">
 
@@ -139,57 +114,19 @@ input {
 
 <script>
 const indicator = document.getElementById("indicator");
-indicator.style.transform = "translateX(120px)";
+const links = document.querySelectorAll(".navbar a");
 
-// TON JS
-const input = document.getElementById("searchInput");
-const results = document.getElementById("results");
+function moveIndicator(element) {
+  const rect = element.getBoundingClientRect();
+  const parentRect = element.parentElement.getBoundingClientRect();
 
-const data = [
-  { name: "PC_001YouTube", type: "user" },
-  { name: "MathisB11", type: "user" },
-  { name: "BlocPlayStudios", type: "user" },
-  { name: "Spawn", type: "map" }
-];
+  const x = rect.left - parentRect.left + (rect.width / 2) - 27.5;
 
-input.addEventListener("keydown", function(e) {
-  if (e.key === "Enter") {
-    const value = input.value.toLowerCase();
-    results.innerHTML = "";
+  indicator.style.transform = `translateX(${x}px)`;
+}
 
-    if (value === "") {
-      results.innerHTML = "Tape quelque chose...";
-      return;
-    }
-
-    const filtered = data.filter(item =>
-      item.name.toLowerCase().includes(value)
-    );
-
-    if (filtered.length === 0) {
-      results.innerHTML = "Aucun résultat trouvé";
-    } else {
-      filtered.forEach(item => {
-        const div = document.createElement("div");
-        div.className = "result";
-
-        div.innerHTML = `
-          ${item.name}
-          <div class="type">${item.type === "user" ? "Utilisateur" : "Map"}</div>
-        `;
-
-        div.onclick = () => {
-          if (item.type === "user") {
-            window.location.href = "/user/" + item.name;
-          } else {
-            window.location.href = "/map/" + item.name;
-          }
-        };
-
-        results.appendChild(div);
-      });
-    }
-  }
+window.addEventListener("load", () => {
+  moveIndicator(links[1]); // recherche actif
 });
 </script>
 
