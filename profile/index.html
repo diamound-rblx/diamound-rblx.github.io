@@ -3,58 +3,131 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diamound - Profil</title>
+<title>Recherche</title>
 
 <style>
-/* TON CSS COMPLET + NAV FIX */
 body {
   margin: 0;
   background: #1c1c1c;
-  font-family: Arial;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  padding-top: 20px;
-  overflow: hidden;
+  font-family: Arial, sans-serif;
 }
 
-.card {
+/* CONTENEUR */
+.container {
   width: 360px;
-  height: 530px;
+  margin: 20px auto;
   background: white;
   border-radius: 35px;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-.navbar { position:relative; }
+/* BARRE DE RECHERCHE */
+input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 14px;
+}
+
+/* TITRES */
+.section-title {
+  font-size: 12px;
+  color: gray;
+  margin: 15px 0 5px 0;
+}
+
+/* NAVBAR */
+.navbar-container {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.navbar {
+  width: 360px;
+  height: 70px;
+  background: white;
+  border-radius: 35px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: relative;
+}
+
+.navbar img {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+/* INDICATEUR */
 .nav-indicator {
-  position:absolute;
-  width:55px;
-  height:55px;
-  background:#4da6ff;
-  border-radius:50%;
-  top:7px;
-  left:0;
-  z-index:0;
-  transition:0.35s;
+  position: absolute;
+  width: 55px;
+  height: 55px;
+  background: #4da6ff;
+  border-radius: 50%;
+  top: 7px;
+  left: 0;
+  z-index: 1;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.navbar a { z-index:1; position:relative; }
 </style>
-</head>
 
+</head>
 <body>
 
+<div class="container">
+
+  <input type="text" placeholder="Rechercher...">
+
+  <!-- JOUEURS -->
+  <div class="section-title">Joueurs</div>
+  <p>PC_001</p>
+  <p>YouTube</p>
+  <p>MathisB11</p>
+  <p>BlocPlayStudios</p>
+
+  <!-- MAPS -->
+  <div class="section-title">Maps</div>
+  <p>Spawn</p>
+
+</div>
+
+<!-- NAVBAR -->
 <div class="navbar-container">
   <div class="navbar">
+
     <div class="nav-indicator" id="indicator"></div>
 
     <a href="/"><img src="/home.png"></a>
     <a href="/search/"><img src="/search.png"></a>
     <a href="/profile/"><img src="/profile.png"></a>
+
   </div>
 </div>
 
 <script>
-document.getElementById("indicator").style.transform = "translateX(240px)";
+const indicator = document.getElementById("indicator");
+const links = document.querySelectorAll(".navbar a");
+
+function moveIndicator(element) {
+  const rect = element.getBoundingClientRect();
+  const parentRect = element.parentElement.getBoundingClientRect();
+
+  const x = rect.left - parentRect.left + (rect.width / 2) - 27.5;
+
+  indicator.style.transform = `translateX(${x}px)`;
+}
+
+window.addEventListener("load", () => {
+  moveIndicator(links[1]); // recherche actif
+});
 </script>
 
 </body>
