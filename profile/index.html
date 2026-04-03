@@ -3,40 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Recherche</title>
+<title>Profil</title>
 
 <style>
 body {
   margin: 0;
   background: #1c1c1c;
-  font-family: Arial, sans-serif;
+  font-family: Arial;
 }
 
-/* CONTENEUR */
 .container {
   width: 360px;
   margin: 20px auto;
   background: white;
   border-radius: 35px;
   padding: 20px;
-  box-sizing: border-box;
 }
 
-/* BARRE DE RECHERCHE */
-input {
-  width: 100%;
-  padding: 12px;
-  border-radius: 25px;
-  border: 1px solid #ccc;
-  outline: none;
-  font-size: 14px;
-}
-
-/* TITRES */
-.section-title {
-  font-size: 12px;
-  color: gray;
-  margin: 15px 0 5px 0;
+button {
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  background: #4da6ff;
+  color: white;
 }
 
 /* NAVBAR */
@@ -61,11 +50,9 @@ input {
 .navbar img {
   width: 40px;
   height: 40px;
-  position: relative;
   z-index: 2;
 }
 
-/* INDICATEUR */
 .nav-indicator {
   position: absolute;
   width: 55px;
@@ -75,7 +62,7 @@ input {
   top: 7px;
   left: 0;
   z-index: 1;
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.35s ease;
 }
 </style>
 
@@ -83,23 +70,13 @@ input {
 <body>
 
 <div class="container">
+  <h2>Profil</h2>
 
-  <input type="text" placeholder="Rechercher...">
-
-  <!-- JOUEURS -->
-  <div class="section-title">Joueurs</div>
-  <p>PC_001</p>
-  <p>YouTube</p>
-  <p>MathisB11</p>
-  <p>BlocPlayStudios</p>
-
-  <!-- MAPS -->
-  <div class="section-title">Maps</div>
-  <p>Spawn</p>
-
+  <button onclick="location.href='/connect'">
+    Se connecter sur Diamound
+  </button>
 </div>
 
-<!-- NAVBAR -->
 <div class="navbar-container">
   <div class="navbar">
 
@@ -126,7 +103,7 @@ function moveIndicator(element) {
 }
 
 window.addEventListener("load", () => {
-  moveIndicator(links[1]); // recherche actif
+  moveIndicator(links[2]);
 });
 </script>
 
