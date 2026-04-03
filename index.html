@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Accueil - Diamound</title>
+<title>Accueil</title>
 
 <style>
 body {
@@ -12,16 +12,13 @@ body {
   font-family: Arial, sans-serif;
 }
 
-/* CARTE */
-.card {
+/* TA PAGE (NE PAS TOUCHER) */
+.content {
   width: 360px;
   height: 530px;
   background: white;
   border-radius: 35px;
   margin: 20px auto;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
 }
 
 /* NAVBAR */
@@ -46,11 +43,10 @@ body {
 .navbar img {
   width: 40px;
   height: 40px;
-  position: relative;
   z-index: 2;
+  position: relative;
 }
 
-/* INDICATEUR */
 .nav-indicator {
   position: absolute;
   width: 55px;
@@ -60,30 +56,25 @@ body {
   top: 7px;
   left: 0;
   z-index: 1;
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.navbar a {
-  z-index: 2;
+  transition: transform 0.35s ease;
 }
 </style>
 
 </head>
 <body>
 
-<div class="card">
-  <h2 style="text-align:center;">Accueil</h2>
+<div class="content">
+  <!-- TON CONTENU -->
 </div>
 
+<!-- NAVBAR -->
 <div class="navbar-container">
   <div class="navbar">
-
     <div class="nav-indicator" id="indicator"></div>
 
     <a href="/"><img src="/home.png"></a>
     <a href="/search/"><img src="/search.png"></a>
     <a href="/profile/"><img src="/profile.png"></a>
-
   </div>
 </div>
 
@@ -91,23 +82,19 @@ body {
 const indicator = document.getElementById("indicator");
 const links = document.querySelectorAll(".navbar a");
 
-function moveIndicator(element) {
-  const rect = element.getBoundingClientRect();
-  const parentRect = element.parentElement.getBoundingClientRect();
-
-  const x = rect.left - parentRect.left + (rect.width / 2) - 27.5;
-
+function moveIndicator(el){
+  const rect = el.getBoundingClientRect();
+  const parent = el.parentElement.getBoundingClientRect();
+  const x = rect.left - parent.left + (rect.width/2) - 27.5;
   indicator.style.transform = `translateX(${x}px)`;
 }
 
-links.forEach(link => {
-  link.addEventListener("click", () => {
-    moveIndicator(link);
+window.addEventListener("load", ()=>{
+  links.forEach(link=>{
+    if(link.getAttribute("href") === "/"){
+      moveIndicator(link);
+    }
   });
-});
-
-window.addEventListener("load", () => {
-  moveIndicator(links[0]);
 });
 </script>
 
