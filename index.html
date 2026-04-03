@@ -3,16 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diamound</title>
+<title>Diamound - Accueil</title>
 
 <style>
 body {
   margin: 0;
   background: #1c1c1c;
-  font-family: Arial;
+  font-family: Arial, sans-serif;
   height: 100vh;
   display: flex;
   justify-content: center;
+  align-items: flex-start;
   padding-top: 20px;
   overflow: hidden;
 }
@@ -22,6 +23,10 @@ body {
   height: 530px;
   background: white;
   border-radius: 35px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
 }
 
 .header {
@@ -36,6 +41,11 @@ body {
   height: 3px;
   background: black;
   margin: 10px auto;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
 }
 
 /* NAVBAR */
@@ -55,9 +65,10 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
 }
 
-.active-indicator {
+.nav-indicator {
   position: absolute;
   width: 55px;
   height: 55px;
@@ -65,7 +76,8 @@ body {
   border-radius: 50%;
   top: 7px;
   left: 0;
-  transition: 0.35s;
+  z-index: 0;
+  transition: transform 0.35s ease;
 }
 
 .navbar a {
@@ -75,37 +87,43 @@ body {
 
 .navbar img {
   width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.navbar img:hover {
+  transform: scale(1.2);
 }
 </style>
-</head>
 
+</head>
 <body>
 
 <div class="card">
   <div class="header">Accueil</div>
   <div class="line"></div>
+
+  <div class="content">
+    Bienvenue sur Diamound 💎
+  </div>
 </div>
 
 <div class="navbar-container">
   <div class="navbar">
-    <div class="active-indicator" id="indicator"></div>
 
-    <a href="/" data-page="home"><img src="/home.png"></a>
-    <a href="/search/" data-page="search"><img src="/search.png"></a>
-    <a href="/profile/" data-page="profile"><img src="/profile.png"></a>
+    <div class="nav-indicator" id="indicator"></div>
+
+    <a href="/"><img src="/home.png"></a>
+    <a href="/search/"><img src="/search.png"></a>
+    <a href="/profile/"><img src="/profile.png"></a>
+
   </div>
 </div>
 
 <script>
-function getPage() {
-  const path = location.pathname;
-  if (path.startsWith("/search")) return 1;
-  if (path.startsWith("/profile")) return 2;
-  return 0;
-}
-
-document.getElementById("indicator").style.transform =
-  "translateX(" + (getPage() * 120) + "px)";
+const indicator = document.getElementById("indicator");
+indicator.style.transform = "translateX(0px)";
 </script>
 
 </body>
