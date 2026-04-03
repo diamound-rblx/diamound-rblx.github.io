@@ -3,16 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Recherche</title>
+<title>Diamound - Recherche</title>
 
 <style>
 body {
   margin: 0;
   background: #1c1c1c;
-  font-family: Arial;
+  font-family: Arial, sans-serif;
   height: 100vh;
   display: flex;
   justify-content: center;
+  align-items: flex-start;
   padding-top: 20px;
   overflow: hidden;
 }
@@ -22,11 +23,16 @@ body {
   height: 530px;
   background: white;
   border-radius: 35px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
 }
 
 .header {
   text-align: center;
   font-size: 28px;
+  font-weight: bold;
   margin-top: 20px;
 }
 
@@ -38,23 +44,28 @@ body {
 }
 
 .content {
-  padding: 20px;
+  flex: 1;
+  padding: 25px;
 }
 
 input {
   width: 100%;
-  padding: 12px;
+  padding: 12px 15px;
   border-radius: 15px;
   border: none;
   background: #f2f2f2;
 }
 
 .result {
+  padding: 12px;
   margin-top: 10px;
-  padding: 10px;
-  background: #eee;
-  border-radius: 10px;
-  cursor: pointer;
+  background: #f5f5f5;
+  border-radius: 12px;
+}
+
+.type {
+  font-size: 12px;
+  color: gray;
 }
 
 /* NAVBAR */
@@ -76,72 +87,110 @@ input {
   align-items: center;
 }
 
-.active-indicator {
+.nav-indicator {
   position: absolute;
   width: 55px;
   height: 55px;
   background: #4da6ff;
   border-radius: 50%;
   top: 7px;
-  transition: 0.35s;
+  left: 0;
+  z-index: 0;
+  transition: transform 0.35s ease;
 }
+
+.navbar a { position:relative; z-index:1; }
 
 .navbar img {
   width: 40px;
+  height: 40px;
 }
 </style>
-</head>
 
+</head>
 <body>
 
 <div class="card">
+
   <div class="header">Recherche</div>
   <div class="line"></div>
 
   <div class="content">
-    <input id="input" placeholder="Rechercher...">
-    <div id="results"></div>
+
+    <input type="text" id="searchInput" placeholder="Rechercher...">
+
+    <div id="results" style="margin-top:20px;"></div>
+
   </div>
+
 </div>
 
 <div class="navbar-container">
   <div class="navbar">
-    <div class="active-indicator" id="indicator"></div>
+
+    <div class="nav-indicator" id="indicator"></div>
 
     <a href="/"><img src="/home.png"></a>
     <a href="/search/"><img src="/search.png"></a>
     <a href="/profile/"><img src="/profile.png"></a>
+
   </div>
 </div>
 
 <script>
+const indicator = document.getElementById("indicator");
+indicator.style.transform = "translateX(120px)";
+
+// TON JS
+const input = document.getElementById("searchInput");
+const results = document.getElementById("results");
+
 const data = [
-  {id:1,name:"PC_001YouTube",type:"user"},
-  {id:2,name:"MathisB11",type:"user"},
-  {id:3,name:"BlocPlayStudios",type:"user"},
-  {name:"Spawn",type:"map"}
+  { name: "PC_001YouTube", type: "user" },
+  { name: "MathisB11", type: "user" },
+  { name: "BlocPlayStudios", type: "user" },
+  { name: "Spawn", type: "map" }
 ];
 
-input.oninput = () => {
-  results.innerHTML = "";
-  data.forEach(d => {
-    if(d.name.toLowerCase().includes(input.value.toLowerCase())){
-      const div = document.createElement("div");
-      div.className = "result";
-      div.innerText = d.name;
+input.addEventListener("keydown", function(e) {
+  if (e.key === "Enter") {
+    const value = input.value.toLowerCase();
+    results.innerHTML = "";
 
-      div.onclick = () => {
-        location.href = d.type==="user"
-          ? "/user/"+d.id
-          : "/map/"+d.name;
-      };
-
-      results.appendChild(div);
+    if (value === "") {
+      results.innerHTML = "Tape quelque chose...";
+      return;
     }
-  });
-};
 
-indicator.style.transform = "translateX(120px)";
+    const filtered = data.filter(item =>
+      item.name.toLowerCase().includes(value)
+    );
+
+    if (filtered.length === 0) {
+      results.innerHTML = "Aucun résultat trouvé";
+    } else {
+      filtered.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "result";
+
+        div.innerHTML = `
+          ${item.name}
+          <div class="type">${item.type === "user" ? "Utilisateur" : "Map"}</div>
+        `;
+
+        div.onclick = () => {
+          if (item.type === "user") {
+            window.location.href = "/user/" + item.name;
+          } else {
+            window.location.href = "/map/" + item.name;
+          }
+        };
+
+        results.appendChild(div);
+      });
+    }
+  }
+});
 </script>
 
 </body>
