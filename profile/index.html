@@ -3,50 +3,49 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Profil</title>
+<title>Diamound - Profil</title>
 
 <style>
-body { margin:0;background:#1c1c1c;font-family:Arial;height:100vh;display:flex;justify-content:center;padding-top:20px;overflow:hidden;}
-.card { width:360px;height:530px;background:white;border-radius:35px;text-align:center;}
-.header { font-size:28px;margin-top:20px;}
-.line { width:80%;height:3px;background:black;margin:10px auto;}
-
-.button {
-  margin-top:20px;
-  padding:10px;
-  background:black;
-  color:white;
-  border-radius:15px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:10px;
-  cursor:pointer;
+/* TON CSS COMPLET + NAV FIX */
+body {
+  margin: 0;
+  background: #1c1c1c;
+  font-family: Arial;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+  overflow: hidden;
 }
 
-/* NAVBAR */
-.navbar-container {position:fixed;bottom:20px;left:50%;transform:translateX(-50%);}
-.navbar {position:relative;width:360px;height:70px;background:white;border-radius:35px;display:flex;justify-content:space-around;align-items:center;}
-.active-indicator {position:absolute;width:55px;height:55px;background:#4da6ff;border-radius:50%;top:7px;transition:0.35s;}
-.navbar img {width:40px;}
+.card {
+  width: 360px;
+  height: 530px;
+  background: white;
+  border-radius: 35px;
+}
+
+.navbar { position:relative; }
+.nav-indicator {
+  position:absolute;
+  width:55px;
+  height:55px;
+  background:#4da6ff;
+  border-radius:50%;
+  top:7px;
+  left:0;
+  z-index:0;
+  transition:0.35s;
+}
+.navbar a { z-index:1; position:relative; }
 </style>
 </head>
 
 <body>
 
-<div class="card">
-  <div class="header">Profil</div>
-  <div class="line"></div>
-
-  <div class="button" onclick="location.href='/connect/'">
-    <img src="/rblx-logo.png" style="width:20px">
-    Se connecter sur Diamound
-  </div>
-</div>
-
 <div class="navbar-container">
   <div class="navbar">
-    <div class="active-indicator" id="indicator"></div>
+    <div class="nav-indicator" id="indicator"></div>
 
     <a href="/"><img src="/home.png"></a>
     <a href="/search/"><img src="/search.png"></a>
@@ -55,7 +54,7 @@ body { margin:0;background:#1c1c1c;font-family:Arial;height:100vh;display:flex;j
 </div>
 
 <script>
-indicator.style.transform = "translateX(240px)";
+document.getElementById("indicator").style.transform = "translateX(240px)";
 </script>
 
 </body>
