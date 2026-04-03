@@ -3,137 +3,54 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diamound - Connexion</title>
+<title>Connexion - Diamound</title>
 
 <style>
 body {
   margin: 0;
   background: #1c1c1c;
   font-family: Arial, sans-serif;
-  height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  padding-top: 20px;
-  overflow: hidden;
+  align-items: center;
+  height: 100vh;
 }
 
-/* CARTE */
 .card {
   width: 360px;
-  height: 530px;
   background: white;
   border-radius: 35px;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
-}
-
-/* HEADER */
-.header {
-  text-align: center;
-  font-size: 26px;
-  font-weight: bold;
-  margin-top: 20px;
-}
-
-.line {
-  width: 80%;
-  height: 3px;
-  background: black;
-  margin: 10px auto;
-}
-
-/* CONTENT */
-.content {
-  flex: 1;
   padding: 25px;
   text-align: center;
+  box-sizing: border-box;
 }
 
-/* CODE */
-.code {
-  font-size: 28px;
+.title {
+  font-size: 20px;
   font-weight: bold;
-  margin-top: 20px;
 }
 
-/* TIMER */
-.timer {
-  margin-top: 15px;
-  font-size: 14px;
-  color: gray;
+.code {
+  font-size: 26px;
+  letter-spacing: 3px;
+  margin: 20px 0;
+  font-weight: bold;
 }
 
-/* BUTTONS */
-.button {
-  margin-top: 15px;
-  padding: 12px;
-  border-radius: 12px;
-  background: black;
-  color: white;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.button:hover {
-  transform: scale(1.05);
-}
-
-.buttons-container {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-/* NAVBAR */
-.navbar-container {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.navbar {
-  position: relative;
-  width: 360px;
-  height: 70px;
-  background: white;
-  border-radius: 35px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
-}
-
-.nav-indicator {
-  position: absolute;
-  width: 55px;
-  height: 55px;
+button {
+  padding: 10px 15px;
+  border-radius: 20px;
+  border: none;
   background: #4da6ff;
-  border-radius: 50%;
-  top: 7px;
-  left: 0;
-  z-index: 0;
-  transition: transform 0.35s ease;
-}
-
-.navbar a {
-  position: relative;
-  z-index: 1;
-}
-
-.navbar img {
-  width: 40px;
-  height: 40px;
+  color: white;
+  margin: 5px;
   cursor: pointer;
-  transition: 0.2s;
 }
 
-.navbar img:hover {
-  transform: scale(1.2);
+.timer {
+  font-size: 12px;
+  color: gray;
+  margin-top: 15px;
 }
 </style>
 
@@ -142,80 +59,46 @@ body {
 
 <div class="card">
 
-  <div class="header">Connexion</div>
-  <div class="line"></div>
+  <div class="title">Connexion à Diamound</div>
 
-  <div class="content">
+  <div class="code" id="code">------</div>
 
-    <div>Ton code :</div>
-    <div class="code" id="code"></div>
+  <button onclick="copyCode()">Copier le code</button>
+  <button onclick="generateCode()">Générer un nouveau code</button>
 
-    <div class="timer" id="timer"></div>
+  <div class="timer" id="timer">Ce code expire dans 30 minutes</div>
 
-    <div class="buttons-container">
-      <div class="button" onclick="copyCode()">Copier le code</div>
-      <div class="button" onclick="generateCode()">Générer un nouveau code</div>
-    </div>
-
-  </div>
-
-</div>
-
-<div class="navbar-container">
-  <div class="navbar">
-
-    <div class="nav-indicator" id="indicator"></div>
-
-    <a href="/"><img src="/home.png"></a>
-    <a href="/search/"><img src="/search.png"></a>
-    <a href="/profile/"><img src="/profile.png"></a>
-
-  </div>
 </div>
 
 <script>
-const indicator = document.getElementById("indicator");
-indicator.style.transform = "translateX(120px)";
-
-/* TON JS */
 let currentCode = "";
-let expiryTime;
+let timeLeft = 30 * 60; // 30 minutes en secondes
 
 function generateCode() {
   currentCode = Math.random().toString(36).substring(2, 8).toUpperCase();
   document.getElementById("code").innerText = currentCode;
-
-  expiryTime = Date.now() + 30 * 60 * 1000;
-  updateTimer();
+  timeLeft = 30 * 60;
 }
 
 function copyCode() {
-  if (!currentCode) return;
   navigator.clipboard.writeText(currentCode);
-  alert("Code copié !");
 }
 
 function updateTimer() {
-  const timer = document.getElementById("timer");
+  if (timeLeft > 0) {
+    timeLeft--;
 
-  const interval = setInterval(() => {
-    const now = Date.now();
-    const diff = expiryTime - now;
+    let minutes = Math.floor(timeLeft / 60);
+    let seconds = timeLeft % 60;
 
-    if (diff <= 0) {
-      clearInterval(interval);
-      timer.innerText = "Code expiré ❌";
-      return;
-    }
-
-    const minutes = Math.floor(diff / 60000);
-    const seconds = Math.floor((diff % 60000) / 1000);
-
-    timer.innerText = "Ce code expire dans " +
-      minutes + "m " + seconds + "s";
-  }, 1000);
+    document.getElementById("timer").innerText =
+      "Ce code expire dans " + minutes + "m " + seconds + "s";
+  }
 }
 
+setInterval(updateTimer, 1000);
+
+// Génération initiale
 generateCode();
 </script>
 
