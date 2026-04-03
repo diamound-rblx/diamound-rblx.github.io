@@ -3,49 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diamound - Accueil</title>
+<title>Accueil - Diamound</title>
 
 <style>
 body {
   margin: 0;
   background: #1c1c1c;
   font-family: Arial, sans-serif;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding-top: 20px;
-  overflow: hidden;
 }
 
+/* CARTE */
 .card {
   width: 360px;
   height: 530px;
   background: white;
   border-radius: 35px;
+  margin: 20px auto;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
-}
-
-.header {
-  text-align: center;
-  font-size: 28px;
-  font-weight: bold;
-  margin-top: 20px;
-}
-
-.line {
-  width: 80%;
-  height: 3px;
-  background: black;
-  margin: 10px auto;
-}
-
-.content {
-  flex: 1;
-  padding: 20px;
 }
 
 /* NAVBAR */
@@ -57,7 +33,6 @@ body {
 }
 
 .navbar {
-  position: relative;
   width: 360px;
   height: 70px;
   background: white;
@@ -65,9 +40,17 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+  position: relative;
 }
 
+.navbar img {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+/* INDICATEUR */
 .nav-indicator {
   position: absolute;
   width: 55px;
@@ -76,24 +59,12 @@ body {
   border-radius: 50%;
   top: 7px;
   left: 0;
-  z-index: 0;
-  transition: transform 0.35s ease;
+  z-index: 1;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .navbar a {
-  position: relative;
-  z-index: 1;
-}
-
-.navbar img {
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.navbar img:hover {
-  transform: scale(1.2);
+  z-index: 2;
 }
 </style>
 
@@ -101,12 +72,7 @@ body {
 <body>
 
 <div class="card">
-  <div class="header">Accueil</div>
-  <div class="line"></div>
-
-  <div class="content">
-    Bienvenue sur Diamound 💎
-  </div>
+  <h2 style="text-align:center;">Accueil</h2>
 </div>
 
 <div class="navbar-container">
@@ -123,7 +89,26 @@ body {
 
 <script>
 const indicator = document.getElementById("indicator");
-indicator.style.transform = "translateX(0px)";
+const links = document.querySelectorAll(".navbar a");
+
+function moveIndicator(element) {
+  const rect = element.getBoundingClientRect();
+  const parentRect = element.parentElement.getBoundingClientRect();
+
+  const x = rect.left - parentRect.left + (rect.width / 2) - 27.5;
+
+  indicator.style.transform = `translateX(${x}px)`;
+}
+
+links.forEach(link => {
+  link.addEventListener("click", () => {
+    moveIndicator(link);
+  });
+});
+
+window.addEventListener("load", () => {
+  moveIndicator(links[0]);
+});
 </script>
 
 </body>
