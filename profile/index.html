@@ -9,23 +9,30 @@
 body {
   margin: 0;
   background: #1c1c1c;
-  font-family: Arial;
+  font-family: Arial, sans-serif;
 }
 
+/* CONTENU */
 .container {
   width: 360px;
   margin: 20px auto;
   background: white;
   border-radius: 35px;
   padding: 20px;
+  box-sizing: border-box;
 }
 
+/* BOUTON */
 button {
-  padding: 10px;
+  padding: 10px 15px;
   border-radius: 20px;
   border: none;
   background: #4da6ff;
   color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* NAVBAR */
@@ -50,6 +57,7 @@ button {
 .navbar img {
   width: 40px;
   height: 40px;
+  position: relative;
   z-index: 2;
 }
 
@@ -62,7 +70,7 @@ button {
   top: 7px;
   left: 0;
   z-index: 1;
-  transition: transform 0.35s ease;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 </style>
 
@@ -70,13 +78,18 @@ button {
 <body>
 
 <div class="container">
+
   <h2>Profil</h2>
 
+  <!-- BOUTON AVEC LOGO ROBLOX -->
   <button onclick="location.href='/connect'">
+    <img src="/rblx-logo.png" style="width:18px; margin-right:8px;">
     Se connecter sur Diamound
   </button>
+
 </div>
 
+<!-- NAVBAR -->
 <div class="navbar-container">
   <div class="navbar">
 
@@ -93,17 +106,19 @@ button {
 const indicator = document.getElementById("indicator");
 const links = document.querySelectorAll(".navbar a");
 
-function moveIndicator(element) {
-  const rect = element.getBoundingClientRect();
-  const parentRect = element.parentElement.getBoundingClientRect();
-
-  const x = rect.left - parentRect.left + (rect.width / 2) - 27.5;
-
+function moveIndicator(el){
+  const rect = el.getBoundingClientRect();
+  const parent = el.parentElement.getBoundingClientRect();
+  const x = rect.left - parent.left + (rect.width / 2) - 27.5;
   indicator.style.transform = `translateX(${x}px)`;
 }
 
-window.addEventListener("load", () => {
-  moveIndicator(links[2]);
+window.addEventListener("load", ()=>{
+  links.forEach(link=>{
+    if(link.getAttribute("href") === "/profile/"){
+      moveIndicator(link);
+    }
+  });
 });
 </script>
 
